@@ -47,7 +47,8 @@ module Authorization
       @finder_options = {}
       table_metadata = ActiveRecord::TableMetadata.new(model, model.arel_table)
       predicate_builder = ActiveRecord::PredicateBuilder.new(table_metadata)
-      super(model, model.table_name, predicate_builder)
+      # ActiveRecord::Relation initialize method takes only one argument in Rails 6 sets table to model.arel_table and predicate_builder to model.predicate_builder by default
+      super(model)
     end
 
     def scope
